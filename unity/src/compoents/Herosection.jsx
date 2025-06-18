@@ -22,14 +22,12 @@ function HeroSection() {
         videoRefs.current.forEach((ref, i) => {
             if (!ref) return;
 
-            // Entry animation
             gsap.fromTo(
                 ref,
                 { opacity: 0, y: 30 },
                 { opacity: 1, y: 0, duration: 0.7, delay: i * 0.1, ease: "power2.out" }
             );
 
-            // Parallax animation
             gsap.to(ref, {
                 y: i % 2 === 0 ? -50 : 50,
                 scrollTrigger: {
@@ -74,11 +72,11 @@ function HeroSection() {
     return (
         <div
             ref={mainRef}
-            className="relative min-h-screen w-screen overflow-hidden bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 text-white"
+            className="relative min-h-screen w-screen overflow-hidden bg-gradient-to-r from-[#3a5a40] via-[#588157] to-[#a3b18a] text-white font-[Poppins]"
         >
             {/* Navbar Slide-in */}
             <div
-                className={`fixed top-0 right-0 h-full w-1/2 z-50 flex justify-center items-center transition-transform duration-500 ${showNavbar ? "translate-x-0" : "translate-x-full"}`}
+                className={`fixed top-0 right-0 h-full w-full max-w-[320px] z-50 transition-transform duration-500 ${showNavbar ? "translate-x-0" : "translate-x-full"}`}
             >
                 <Navbar onClose={() => setShowNavbar(false)} />
             </div>
@@ -111,10 +109,10 @@ function HeroSection() {
                     ref={contentRef}
                     className="flex-1 space-y-6 backdrop-blur-xl bg-white/10 p-10 rounded-3xl shadow-2xl border border-white/20"
                 >
-                    <h1 className="text-5xl md:text-6xl font-extrabold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-500 to-red-500">
+                    <h1 className="text-5xl md:text-6xl font-extrabold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-[#adc178] via-[#a98467] to-[#6c584c]">
                         UNITY ENTERPRISES
                     </h1>
-                    <p className="text-3xl text-white/90 font-cursive">
+                    <p className="text-3xl text-white/90">
                         A BETTER TOMORROW BEGINS WITH TODAY’S INNOVATION
                     </p>
                     <button className="mt-4 px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-slate-200 transition duration-300">
@@ -123,7 +121,7 @@ function HeroSection() {
                 </div>
 
                 {/* Right Video Grid */}
-                <div className="flex-1 flex flex-col justify-center items-center gap-6">
+                <div className="flex-1 flex flex-col justify-center items-center gap-7">
                     <div className="flex gap-4">
                         {[1, 3].map((num, i) => (
                             <div

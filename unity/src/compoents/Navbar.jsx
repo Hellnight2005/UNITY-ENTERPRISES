@@ -2,14 +2,15 @@ import React, { useRef } from 'react';
 import gsap from 'gsap';
 
 const links = ['Home', 'About', 'Services', 'Contact'];
-const colors = ['#ff6f61', '#ffca3a', '#1982c4']; // Vibrant gradient layers
+const colors = ['#67a9a2', '#ffca3a', '#244344'];
 
 function Navbar({ onClose }) {
     const linkRefs = useRef([]);
     const planeRefs = useRef([]);
 
     const handleMouseEnter = (i) => {
-        const planes = planeRefs.current[i].children;
+        const planes = planeRefs.current[i]?.children;
+        if (!planes) return;
         const tl = gsap.timeline();
 
         tl.fromTo(
@@ -43,37 +44,34 @@ function Navbar({ onClose }) {
     };
 
     return (
-        <div className="bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 w-full h-screen p-10 flex items-center justify-center relative overflow-hidden">
+        <div className="fixed top-0 right-0 h-fit w-[320px] bg-gradient-to-b from-[#3a5a40] via-[#588157] to-[#a3b18a] p-6 shadow-lg border-l border-white/10 z-50 flex flex-col">
             {/* Close Button */}
             <button
                 onClick={onClose}
-                className="absolute top-6 right-6 text-black text-2xl font-bold px-4 py-2 bg-black/40 backdrop-blur rounded-full shadow hover:bg-white hover:text-black transition z-50"
+                className="self-end mb-10 text-white text-xl font-bold px-3 py-1 bg-white/10 hover:bg-white/20 backdrop-blur rounded-full transition"
             >
                 ✕
             </button>
 
-            <nav className="flex flex-col items-center space-y-6 text-4xl font-bold tracking-wide">
+            <nav className="flex flex-col items-end space-y-6 w-full">
                 {links.map((link, i) => (
                     <div
                         key={link}
-                        className="relative overflow-hidden cursor-pointer group w-[600px] h-28 rounded-3xl border border-white/20 shadow-lg"
+                        className="relative overflow-hidden cursor-pointer w-full max-w-[240px] h-16 rounded-xl border border-white/20"
                         onMouseEnter={() => handleMouseEnter(i)}
                         onMouseLeave={() => handleMouseLeave(i)}
                         onClick={onClose}
                         ref={(el) => (linkRefs.current[i] = el)}
-                        style={{
-                            clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)',
-                        }}
                     >
                         {/* Animated planes */}
                         <div
-                            className="absolute inset-0"
+                            className="absolute inset-0 rounded-xl"
                             ref={(el) => (planeRefs.current[i] = el)}
                         >
                             {colors.map((color, index) => (
                                 <div
                                     key={index}
-                                    className={`w-full h-full absolute left-0 top-0 z-${10 + index * 10} opacity-80`}
+                                    className="w-full h-full absolute left-0 top-0 opacity-70 rounded-xl"
                                     style={{
                                         backgroundColor: color,
                                         mixBlendMode: 'screen',
@@ -83,7 +81,7 @@ function Navbar({ onClose }) {
                         </div>
 
                         {/* Link text */}
-                        <span className="relative z-50 h-full flex items-center justify-center text-black drop-shadow-lg transition duration-300">
+                        <span className="relative z-10 h-full w-full flex items-center justify-center text-black font-semibold text-2xl text-center">
                             {link}
                         </span>
                     </div>
